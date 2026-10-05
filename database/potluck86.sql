@@ -13,13 +13,8 @@ CREATE TABLE `users` (
 
 -- Password hashing untuk: admin123 dan dapur123
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role`) VALUES
-<<<<<<< HEAD
-(1, 'Administrator', 'admin', '$2y$10$wE99Sj3J6RjG6pXQfXy5v.vE5z2O31QGv10T1K3v8L7mY2S9m91y.', 'admin'),
-(2, 'Tim Dapur', 'dapur', '$2y$10$8k9Y2mK5uX7kZ9sN6vP1g.aJ8aO0P2k3L4m5N6o7P8q9R0s1T2u3V.', 'dapur');
-=======
-(1, 'Administrator', 'admin', '$2y$10$j8o1GeIDQlmO55C6bYlEp.bTH9j5J2CK0BZpCzh/mmkKX5WI0GzXG', 'admin'),
-(2, 'Tim Dapur', 'dapur', '$2y$10$Pa5rPPnGv.Z4o3pytiVNMeayKBc99Pr6Yu1N4uKdwPyJD2yJ695d2', 'dapur');
->>>>>>> 5070144 (V2)
+(1, 'Administrator', 'admin', '$2y$10$fZfuxu4xnUz5201IIFw9SOIJDQBFIEf/m61q5uyMqOY8zWymus9g2', 'admin'),
+(2, 'Tim Dapur', 'dapur', '$2y$10$vZD8lERZ1htk8VsS5Qg0/uz3l6KhZXXcGU8gi8YkJQGcKg5lof8Wa', 'dapur');
 
 -- 2. Tabel meja
 CREATE TABLE `meja` (
@@ -40,7 +35,8 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `kategori` (`id`, `nama_kategori`) VALUES
-(1, 'Makanan'), (2, 'Snack'), (3, 'Minuman'), (4, 'Coffee'), (5, 'Non-Coffee'), (6, 'Dessert');
+(1, 'Coffee'), (2, 'Non-Coffee'), (3, 'Snacks'), (4, 'Desserts'), (5, 'Main Course'),(6,'Tomyum'),(7, 'Rice Bowl'), (8, 'Kids Meal'), (9, 'Addons');
+
 
 -- 4. Tabel menu
 CREATE TABLE `menu` (
@@ -57,16 +53,123 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `foto`, `stok`, `status`) VALUES
-(1, 1, 'Nasi Goreng Special', 'Nasi goreng dengan rempah pilihan, telur, dan ayam suwir.', 25000.00, 'nasgor.jpg', 50, 'tersedia'),
-(2, 1, 'Mie Goreng Dok-Dok', 'Mie goreng gurih khas cafe dengan sosis dan sayuran segar.', 23000.00, 'miegoreng.jpg', 50, 'tersedia'),
-(3, 1, 'Chicken Steak', 'Dada ayam panggang saus lada hitam served with french fries.', 35000.00, 'steak.jpg', 30, 'tersedia'),
-(4, 2, 'French Fries', 'Kentang goreng renyah dengan taburan bumbu balado/asin.', 18000.00, 'fries.jpg', 100, 'tersedia'),
-(5, 2, 'Chicken Wings', 'Sayap ayam goreng bersalut saus BBQ pedas manis.', 28000.00, 'wings.jpg', 40, 'tersedia'),
-(6, 4, 'Es Kopi Susu Potluck', 'Perpaduan espresso espresso, gula aren murni, dan susu segar.', 20000.00, 'kobisus.jpg', 100, 'tersedia'),
-(7, 4, 'Americano', 'Espresso shot ganda disajikan dingin atau hangat.', 18000.00, 'americano.jpg', 100, 'tersedia'),
-(8, 4, 'Cappuccino', 'Espresso nikmat dikombinasikan dengan steamed milk tebal.', 22000.00, 'cappuccino.jpg', 100, 'tersedia'),
-(9, 5, 'Matcha Latte', 'Matcha Jepang autentik dengan susu pilihan yang creamy.', 24000.00, 'matcha.jpg', 80, 'tersedia'),
-(10, 5, 'Lemon Tea', 'Teh segar diseduh alami dengan perasan jeruk lemon asli.', 15000.00, 'lemontea.jpg', 100, 'tersedia');
+
+-- Coffee
+(1, 1, 'Kopi 86', 'Kopi khas potluck dengan rasa yang khas.', 20000.00, 'kopi.jpg', 50, 'tersedia'),
+(2, 1, 'Jaga ', 'Kopi khas potluck dengan rasa aren yang khas.', 35000.00, 'kopi.jpg', 50, 'tersedia'),
+(3, 1, 'Mojang', 'Kopi khas potluck dengan rasa Melon yang khas.', 35000.00, 'kopi.jpg', 50, 'tersedia'),
+(4, 1, 'Segara', 'Kopi khas potluck dengan rasa Caramel Sea Salt yang khas.', 35000.00, 'kopi.jpg', 50, 'tersedia'),
+(5, 1, 'Yuan Yang', 'Kopi khas potluck dengan rasa yang khas.', 20000.00, 'kopi.jpg', 50, 'tersedia'),
+(6, 1, 'Kopi Susu', 'Kopi khas potluck dengan rasa yang khas.', 20000.00, 'kopi.jpg', 50, 'tersedia'),
+(7, 1, 'Espresso', 'Espresso khas potluck.', 15000.00, 'kopi.jpg', 50, 'tersedia'),
+(8, 1, 'On The Rock', 'Kopi khas potluck dengan rasa yang khas.', 20000.00, 'kopi.jpg', 50, 'tersedia'),
+(9, 1, 'Americano', 'Americano khas potluck.', 22000.00, 'kopi.jpg', 50, 'tersedia'),
+(10, 1, 'Picolo', 'Kopi khas potluck dengan rasa yang khas.', 25000.00, 'kopi.jpg', 50, 'tersedia'),
+(11, 1, 'Latte', 'Latte khas potluck.', 28000.00, 'kopi.jpg', 50, 'tersedia'),
+(12, 1, 'Cappuccino', 'Cappuccino khas potluck.', 28000.00, 'kopi.jpg', 50, 'tersedia'),
+(13, 1, 'Coconut Latte', 'Latte dengan rasa kelapa.', 25000.00, 'kopi.jpg', 50, 'tersedia'),
+(14, 1, 'Caramel Macchiato', 'Kopi khas potluck dengan rasa yang khas.', 25000.00, 'kopi.jpg', 50, 'tersedia'),
+(15, 1, 'Butterscotch', 'Kopi khas potluck dengan rasa yang khas.', 25000.00, 'kopi.jpg', 50, 'tersedia'),
+
+-- Non Coffee
+(16, 2, 'Milo 86', 'Milo', 22000.00, 'milo.jpg', 50, 'tersedia'),
+(17, 2, 'Choco 86', 'Minuman Chocolate Khas potluck', 25000.00, 'choco.jpg', 50, 'tersedia'),
+(18, 2, 'Original ThaiTea', 'Tea khas potluck dengan rasa yang khas.', 22000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(19, 2, 'Original ThaiGreenTea', 'Green Tea khas potluck dengan rasa yang khas.', 22000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(20, 2, 'Coconut Matcha', 'Matcha khas potluck dengan rasa kelapa.', 25000.00, 'matcha.jpg', 50, 'tersedia'),
+(21, 2, 'Coconut Pandan', 'Pandan khas potluck dengan rasa kelapa.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+
+-- Milk
+(22, 2, 'Fresh Milk', 'Susu segar khas potluck.', 20000.00, 'milk.jpg', 50, 'tersedia'),
+(23, 2, 'Chocolate Milk', 'Susu cokelat khas potluck.', 20000.00, 'chocolate_milk.jpg', 50, 'tersedia'),
+(24, 2, 'Caramel Milk', 'Susu karamel khas potluck.', 25000.00, 'caramel_milk.jpg', 50, 'tersedia'),
+(25, 2, 'Hazelnut Milk', 'Susu hazelnut khas potluck.', 25000.00, 'hazelnut_milk.jpg', 50, 'tersedia'),
+(26, 2, 'Vanilla Milk', 'Susu vanilla khas potluck.', 25000.00, 'vanilla_milk.jpg', 50, 'tersedia'),
+(27, 2, 'Lychee Milk', 'Susu lychee khas potluck.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(28, 2, 'Peach Milk', 'Susu peach khas potluck.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+    (29, 2, 'Strawberry Milk', 'Susu stroberi khas potluck.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+
+-- MockTail
+(30, 2, 'Summer Light', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'mocktail.jpg', 50, 'tersedia'),
+(31, 2, 'Lychee Tea', 'Tea khas potluck dengan rasa lychee.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(32, 2, 'Peach Tea', 'Tea khas potluck dengan rasa peach.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(33, 2, 'Purple Sea', 'Tea khas potluck dengan rasa yang khas.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(34, 2, 'Pink Lady', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(35, 2, 'Blue Lagoon', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(36, 2, 'Ocean Wave', 'Tea khas potluck dengan rasa yang menyenangkan.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+
+-- another drinks
+(37, 2, 'Mineral Water', 'Air mineral segar.', 10000.00, 'mineral_water.jpg', 50, 'tersedia'),
+(38, 2, 'Teh ', 'Minuman teh.', 6000.00, 'teh.jpg', 50, 'tersedia'),
+(39, 2, 'Ocha Tea', 'Minuman tea ocha segar.', 10000.00, 'ocha_tea.jpg', 50, 'tersedia'),
+(40, 2, 'Lemon Tea', 'Teh lemon segar.', 20000.00, 'iced_tea.jpg', 50, 'tersedia'),
+(41, 2, 'Teh Tarik', 'Minuman teh tarik khas.', 20000.00, 'iced_coffee.jpg', 50, 'tersedia'),
+(42, 2, 'Ice Orange', 'Minuman es orange.', 20000.00, 'iced_orange.jpg', 50, 'tersedia'),
+(43, 2, 'Ice Lychee', 'Minuman es lychee.', 20000.00, 'iced_lychee.jpg', 50, 'tersedia'),
+(44, 2, 'Honey Lemon', 'Minuman honey   lemon segar.', 22000.00, 'Honey_Lemon.jpg', 50, 'tersedia'),
+(45, 2, 'jeruk Peras', 'Minuman jeruk peras segar.', 22000.00, 'jeruk_peras.jpg', 50, 'tersedia'),
+
+-- Snacks
+(46, 3, 'Telur Ayam Kampung', 'Telur ayam kampung segar, dimasak dengan cara yang lezat.', 17000.00, 'telur.jpg', 50, 'tersedia'),
+(47, 3, 'Toast Butter Sugar', 'Roti panggang dengan mentaga dan taburan gula halus, cocok untuk sarapan.', 18000.00, 'TBS.jpg', 50, 'tersedia'),
+(48, 3, 'Toast Butter Srikaya', 'Roti panggang dengan mentaga dan taburan srikaya, cocok untuk sarapan.', 18000.00, 'rotibakar.jpg', 50, 'tersedia'),
+(49, 3, 'Toast Keju', 'Roti panggang dengan mentaga dan taburan keju, cocok untuk sarapan.', 18000.00, 'rotibakar.jpg', 50, 'tersedia'),
+(50, 3, 'Toast Jainudin', 'Roti panggang dengan mentaga dan taburan jainudin, cocok untuk sarapan.', 18000.00, 'rotibakar.jpg', 50, 'tersedia'),
+(51, 3, 'Smoked Chicken Sandwich', 'Sandwich dengan ayam asap, sayuran segar, dan saus spesial.', 25000.00, 'scs.jpg', 50, 'tersedia'),
+(52, 3, 'Pisang Goreng Srikaya', 'Pisang goreng renyah dengan taburan gula halus dan saus srikaya.', 18000.00, 'pisanggoreng.jpg', 50, 'tersedia'),
+(53, 3, 'Pisang Goreng Keju', 'Pisang goreng renyah dengan taburan keju parut dan susu.', 20000.00, 'pisanggoreng.jpg', 50, 'tersedia'),
+(54, 3, 'Singkong', 'Singkong renyah.', 20000.00, 'singkong.jpg', 50, 'tersedia'),
+(55, 3, 'French Fries', 'Kentang goreng renyah dengan saus karamel manis dan taburan kacang.', 18000.00, 'fries.jpg', 50, 'tersedia'),
+(56, 3, 'Eggy Chicken Roll', 'Roti gulung dengan isian ayam, telur, dan sayuran segar.', 20000.00, 'eggroll.jpg', 50, 'tersedia'),
+(57, 3, 'Shrimpy Roll', 'Roti gulung dengan isian udang, telur, dan sayuran segar.', 20000.00, 'eggroll.jpg', 50, 'tersedia'),
+(58, 3, 'Beef Cheese Burger', 'Burger daging sapi dengan keju leleh, selada, dan saus spesial.', 35000.00, 'burger.jpg', 50, 'tersedia'),
+(59, 3, 'Chicken Burger', 'Burger ayam dengan keju leleh, selada, dan saus spesial.', 32000.00, 'burger.jpg', 50, 'tersedia'),
+
+
+-- Deserts
+(60, 4, 'Ice Kacang Leci', 'Es kacang merah dengan sirup manis dan taburan kacang.', 25000.00, 'es_kacang.jpg', 50, 'tersedia'),
+(61, 4, 'Ice Kacang Orange', 'Es kacang merah dengan sirup orange dan taburan kacang.', 25000.00, 'es_kacang.jpg', 50, 'tersedia'),
+
+-- Main Course
+(62, 5, 'Sate Kuah', 'Sate ayam dengan kuah kacang yang lezat.', 29000.00, 'sate_kuah.jpg', 50, 'tersedia'),
+(63, 5, 'Mie Keriting 86', 'Mie keriting dengan telur, ayam, dan sayuran segar.', 18000.00, 'mie_keriting.jpg', 50, 'tersedia'),
+(64, 5, 'Mie Pok 86', 'Mie pok dengan telur, ayam, dan sayuran segar.', 18000.00, 'mie_goreng.jpg', 50, 'tersedia'),
+(65, 5, 'Mie keriting Bakso 86', 'Mie keriting dengan bakso, telur, dan sayuran segar.', 26000.00, 'mie_keriting.jpg', 50, 'tersedia'),
+(66, 5, 'Mie Pok Bakso 86', 'Mie pok dengan bakso, telur, dan sayuran segar.', 26000.00, 'mie_goreng.jpg', 50, 'tersedia'),
+
+-- tomyum
+(67, 6, 'Tomyum Chicken Ramen', 'Ramen dengan kuah tomyum pedas dan ayam.', 32000.00, 'tomyum.jpg', 50, 'tersedia'),
+(68, 6, 'Tomyum Beef Ramen', 'Ramen dengan kuah tomyum pedas dan daging sapi.', 34000.00, 'tomyum.jpg', 50, 'tersedia'),
+(69, 6, 'Tomyum Shrimp Ramen', 'Ramen dengan kuah tomyum pedas dan udang.', 38000.00, 'tomyum.jpg', 50, 'tersedia'),
+(70, 6, 'Tomyum Chicken Friedrice', 'Nasi goreng dengan kuah tomyum pedas dan ayam.', 32000.00, 'tomyum.jpg', 50, 'tersedia'),
+(87, 6, 'Tomyum Beef Friedrice', 'Nasi goreng dengan kuah tomyum pedas dan daging sapi.', 34000.00, 'tomyum.jpg', 50, 'tersedia'),
+(88, 6, 'Tomyum Shrimp Friedrice', 'Nasi goreng dengan kuah tomyum pedas dan udang.', 38000.00, 'tomyum.jpg', 50, 'tersedia'),
+
+-- Rice Bowl
+
+(89, 7, 'Kiassu Salted Egg', 'Nasi dengan telur asin, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(90, 7, 'Gringo BBQ', 'Nasi dengan ayam BBQ, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(91, 7, 'Honey Oppa', 'Nasi dengan ayam honey, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(92, 7, 'ChickenPop Geprek', 'Nasi dengan ayam BBQ, sayuran segar, dan saus spesial.', 26000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(93, 7, 'Fish Katsu', 'Nasi dengan ikan katsu, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(94, 7, 'Beef Belly', 'Nasi dengan daging sapi, Black pepper , mushroom dan saus Spicy Butter.', 38000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(95, 7, 'Wagyu Beef', 'Nasi dengan daging sapi Wagyu, Black pepper , mushroom dan saus Spicy Butter.', 45000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(96, 7, 'Bulgogi Beef', 'Nasi dengan daging sapi Bulgogi.', 38000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(97, 7, 'Smoked Beef Ricebowl', 'Nasi dengan daging sapi smoked, sayuran segar, dan saus spesial.', 38000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(98, 7, 'Smoked Chicken Ricebowl', 'Nasi dengan daging ayam smoked, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(99, 7, 'Smoked Beef Friedrice', 'Nasi goreng dengan daging sapi smoked, sayuran segar, dan saus spesial.', 34000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+(100, 7, 'Smoked Chicken Friedrice', 'Nasi goreng dengan daging ayam smoked, sayuran segar, dan saus spesial.', 34000.00, 'rice_bowl.jpg', 50, 'tersedia'),
+
+-- Addons
+(101, 9, 'Rice', 'Tambahan nasi.', 6000.00, 'addons.jpg', 50, 'tersedia'),
+(102, 9, 'Telur Matamoe', 'Tambahan telur matamoe.', 5000.00, 'addons.jpg', 50, 'tersedia'),
+(103, 9, 'Mayo Original', 'Tambahan mayo original.', 4000.00, 'addons.jpg', 50, 'tersedia'),
+(104, 9, 'Sambal', 'Tambahan sambal Mata/Reggae/Rookie.', 4000.00, 'addons.jpg', 50, 'tersedia');
+
+
+
+
+
 
 -- 5. Tabel pesanan
 CREATE TABLE `pesanan` (
@@ -100,4 +203,7 @@ INSERT INTO `pesanan` (`id`, `nomor_pesanan`, `meja_id`, `total`, `metode_pembay
 
 INSERT INTO `detail_pesanan` (`pesanan_id`, `menu_id`, `jumlah`, `harga`, `catatan`, `subtotal`) VALUES
 (1, 1, 1, 25000.00, 'Jangan terlalu pedas', 25000.00),
+
+
+
 (1, 6, 2, 20000.00, 'Sedikit es', 40000.00);

@@ -28,11 +28,7 @@ $total_pendapatan = $pdo->query("SELECT SUM(total) FROM pesanan WHERE status = '
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item"><a href="dashboard.php" class="nav-link text-white active">Dashboard</a></li>
             <li><a href="pesanan.php" class="nav-link text-white">Pesanan</a></li>
-<<<<<<< HEAD
             <li><a href="menu.php" class="nav-link text-white">Menu</a></li>
-=======
-            <li><a href="../pages/menu.php" class="nav-link text-white">Menu</a></li>
->>>>>>> 5070144 (V2)
             <li><a href="../pages/logout.php" class="nav-link text-danger mt-4">Logout</a></li>
         </ul>
     </div>

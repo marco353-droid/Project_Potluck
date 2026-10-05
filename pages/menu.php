@@ -81,11 +81,7 @@ $menus = $stmt_menu->fetchAll();
                         </div>
                         <div>
                             <div class="fw-bold text-warm-accent mb-2">Rp <?php echo number_format($m['harga'], 0, ',', '.'); ?></div>
-<<<<<<< HEAD
                             <button onclick="addToCart(<?php echo $m['id']; ?>, '<?php echo addslashes($m['nama_menu']); ?>', <?php echo $m['harga']; ?>)" class="btn btn-potluck btn-sm w-100">+ Tambah</button>
-=======
-                            <button onclick="addToCart(this, <?php echo $m['id']; ?>, '<?php echo addslashes($m['nama_menu']); ?>', <?php echo $m['harga']; ?>)" class="btn btn-potluck btn-sm w-100">+ Tambah</button>
->>>>>>> 5070144 (V2)
                         </div>
                     </div>
                 </div>
@@ -103,11 +99,7 @@ $menus = $stmt_menu->fetchAll();
 </div>
 
 <script>
-<<<<<<< HEAD
 function addToCart(id, nama, harga) {
-=======
-function addToCart(button, id, nama, harga) {
->>>>>>> 5070144 (V2)
     let cart = JSON.parse(localStorage.getItem('potluck_cart')) || [];
     let existing = cart.find(item => item.id === id);
     if (existing) {
@@ -117,80 +109,7 @@ function addToCart(button, id, nama, harga) {
     }
     localStorage.setItem('potluck_cart', JSON.stringify(cart));
     updateCartBadge();
-<<<<<<< HEAD
     alert(nama + ' telah ditambahkan ke keranjang!');
-=======
-    animateItemToCart(button, nama);
-
-    button.classList.add('is-added');
-    button.textContent = '✓ Ditambahkan';
-    window.setTimeout(() => {
-        button.classList.remove('is-added');
-        button.textContent = '+ Tambah';
-    }, 900);
-}
-
-function animateItemToCart(button, nama) {
-    const badge = document.getElementById('cart-count');
-    const bumpBadge = () => {
-        badge.classList.remove('is-bumping');
-        void badge.offsetWidth;
-        badge.classList.add('is-bumping');
-    };
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        bumpBadge();
-        return;
-    }
-
-    const start = button.getBoundingClientRect();
-    const target = badge.getBoundingClientRect();
-    const flightItem = document.createElement('div');
-    const quantity = document.createElement('span');
-    const label = document.createElement('span');
-
-    flightItem.className = 'cart-flight-item';
-    flightItem.setAttribute('aria-hidden', 'true');
-    quantity.textContent = '+1';
-    label.textContent = nama;
-    flightItem.append(quantity, label);
-    document.body.appendChild(flightItem);
-
-    const startX = start.left + start.width / 2;
-    const startY = start.top + start.height / 2;
-    const targetX = target.left + target.width / 2;
-    const targetY = target.top + target.height / 2;
-
-    if (typeof flightItem.animate !== 'function') {
-        flightItem.remove();
-        bumpBadge();
-        return;
-    }
-
-    const flight = flightItem.animate([
-        {
-            left: `${startX}px`,
-            top: `${startY}px`,
-            opacity: 1,
-            transform: 'translate(-50%, -50%) scale(1)'
-        },
-        {
-            left: `${targetX}px`,
-            top: `${targetY}px`,
-            opacity: 0,
-            transform: 'translate(-50%, -50%) scale(0.35)'
-        }
-    ], {
-        duration: 650,
-        easing: 'cubic-bezier(0.22, 0.75, 0.3, 1)',
-        fill: 'forwards'
-    });
-
-    flight.onfinish = () => {
-        flightItem.remove();
-        bumpBadge();
-    };
->>>>>>> 5070144 (V2)
 }
 
 function updateCartBadge() {
