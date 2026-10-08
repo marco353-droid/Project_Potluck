@@ -85,8 +85,13 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (17, 2, 'Choco 86', 'Minuman Chocolate Khas potluck', 25000.00, 'choco.jpg', 50, 'tersedia'),
 (18, 2, 'Original ThaiTea', 'Tea khas potluck dengan rasa yang khas.', 22000.00, 'thaimassage.jpg', 50, 'tersedia'),
 (19, 2, 'Original ThaiGreenTea', 'Green Tea khas potluck dengan rasa yang khas.', 22000.00, 'thaimassage.jpg', 50, 'tersedia'),
+<<<<<<< HEAD
 (20, 2, 'Coconut Matcha', 'Matcha khas potluck dengan rasa kelapa.', 25000.00, 'coconutmatcha.jpg', 50, 'tersedia'),
 (21, 2, 'Coconut Pandan', 'Pandan khas potluck dengan rasa kelapa.', 25000.00, 'coconutpandan.jpg', 50, 'tersedia'),
+=======
+(20, 2, 'Coconut Matcha', 'Matcha khas potluck dengan rasa kelapa.', 25000.00, 'matcha.jpg', 50, 'tersedia'),
+(21, 2, 'Coconut Pandan', 'Pandan khas potluck dengan rasa kelapa.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+>>>>>>> 6586087aff3a243b94fb26737c14cba16e839a3b
 
 -- Milk
 (22, 2, 'Fresh Milk', 'Susu segar khas potluck.', 20000.00, 'milk.jpg', 50, 'tersedia'),
@@ -94,6 +99,7 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (24, 2, 'Caramel Milk', 'Susu karamel khas potluck.', 25000.00, 'caramel_milk.jpg', 50, 'tersedia'),
 (25, 2, 'Hazelnut Milk', 'Susu hazelnut khas potluck.', 25000.00, 'hazelnut_milk.jpg', 50, 'tersedia'),
 (26, 2, 'Vanilla Milk', 'Susu vanilla khas potluck.', 25000.00, 'vanilla_milk.jpg', 50, 'tersedia'),
+<<<<<<< HEAD
 (27, 2, 'Lychee Milk', 'Susu lychee khas potluck.', 25000.00, 'lychee_milk.jpg', 50, 'tersedia'),
 (28, 2, 'Peach Milk', 'Susu peach khas potluck.', 25000.00, 'peach_milk.jpg', 50, 'tersedia'),
     (29, 2, 'Strawberry Milk', 'Susu stroberi khas potluck.', 25000.00, 'strawberry_milk.jpg', 50, 'tersedia'),
@@ -106,6 +112,20 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (34, 2, 'Pink Lady', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'pink_lady.jpg', 50, 'tersedia'),
 (35, 2, 'Blue Lagoon', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'blue_lagoon.jpg', 50, 'tersedia'),
 (36, 2, 'Ocean Wave', 'Tea khas potluck dengan rasa yang menyenangkan.', 28000.00, 'ocean_wave.jpg', 50, 'tersedia'),
+=======
+(27, 2, 'Lychee Milk', 'Susu lychee khas potluck.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(28, 2, 'Peach Milk', 'Susu peach khas potluck.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+    (29, 2, 'Strawberry Milk', 'Susu stroberi khas potluck.', 25000.00, 'thaimassage.jpg', 50, 'tersedia'),
+
+-- MockTail
+(30, 2, 'Summer Light', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'mocktail.jpg', 50, 'tersedia'),
+(31, 2, 'Lychee Tea', 'Tea khas potluck dengan rasa lychee.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(32, 2, 'Peach Tea', 'Tea khas potluck dengan rasa peach.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(33, 2, 'Purple Sea', 'Tea khas potluck dengan rasa yang khas.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(34, 2, 'Pink Lady', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(35, 2, 'Blue Lagoon', 'Mocktail khas potluck dengan rasa yang menyenangkan.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+(36, 2, 'Ocean Wave', 'Tea khas potluck dengan rasa yang menyenangkan.', 28000.00, 'thaimassage.jpg', 50, 'tersedia'),
+>>>>>>> 6586087aff3a243b94fb26737c14cba16e839a3b
 
 -- another drinks
 (37, 2, 'Mineral Water', 'Air mineral segar.', 10000.00, 'mineral_water.jpg', 50, 'tersedia'),
