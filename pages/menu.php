@@ -30,6 +30,14 @@ if (!empty($search)) {
 $stmt_menu = $pdo->prepare($sql);
 $stmt_menu->execute($params);
 $menus = $stmt_menu->fetchAll();
+
+$menu_image_directory = __DIR__ . '/../assets/img';
+$available_menu_images = [];
+foreach (glob($menu_image_directory . '/*') ?: [] as $image_path) {
+    if (is_file($image_path)) {
+        $available_menu_images[strtolower(basename($image_path))] = basename($image_path);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -41,7 +49,7 @@ $menus = $stmt_menu->fetchAll();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="pb-5">
+<body class="pb-5 menu-page">
 
 <nav class="navbar bg-primary-brown sticky-top shadow-sm">
     <div class="container d-flex justify-content-between align-items-center">
@@ -50,51 +58,104 @@ $menus = $stmt_menu->fetchAll();
     </div>
 </nav>
 
-<div class="container mt-3">
+<main class="container menu-content">
     <div id="closed-notice" class="alert alert-warning fw-bold" role="alert" <?php echo $pesanan_buka ? 'hidden' : ''; ?>>
         Potluck sudah tutup. Saat ini kami tidak menerima pesanan.
     </div>
 
-    <!-- Search Bar -->
-    <form action="" method="GET" class="mb-3">
-        <input type="hidden" name="meja" value="<?php echo htmlspecialchars($no_meja); ?>">
-        <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Cari makanan atau minuman..." value="<?php echo htmlspecialchars($search); ?>">
-            <button class="btn btn-potluck" type="submit"><i class="bi bi-search"></i></button>
+    <section class="menu-hero" aria-labelledby="menu-hero-title">
+        <div class="menu-hero-copy">
+            <span class="menu-hero-eyebrow"><i class="bi bi-cup-hot me-1" aria-hidden="true"></i> Potluck86</span>
+            <h1 id="menu-hero-title">Temukan Sajian<br><span>Favoritmu</span></h1>
+            <p>Nikmati pilihan makanan dan minuman dari Potluck86.</p>
+            <form action="" method="GET" class="menu-search">
+                <input type="hidden" name="meja" value="<?php echo htmlspecialchars($no_meja); ?>">
+                <?php if ($kat_id !== 'all'): ?>
+                    <input type="hidden" name="kategori" value="<?php echo htmlspecialchars($kat_id); ?>">
+                <?php endif; ?>
+                <div class="input-group">
+                    <input type="search" name="search" class="form-control" placeholder="Cari makanan atau minuman..." value="<?php echo htmlspecialchars($search); ?>" aria-label="Cari menu">
+                    <button class="btn btn-potluck" type="submit" aria-label="Cari"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
         </div>
-    </form>
+        <div class="menu-hero-art" aria-hidden="true">
+            <span class="menu-hero-spark menu-hero-spark-one"><i class="bi bi-stars"></i></span>
+            <span class="menu-hero-spark menu-hero-spark-two"><i class="bi bi-heart-fill"></i></span>
+            <img src="../assets/img/coconutmatcha.jpg" alt="">
+            <span class="menu-hero-caption"><i class="bi bi-cup-straw me-1"></i> Dibuat dengan sepenuh hati</span>
+        </div>
+    </section>
 
-    <!-- Kategori Bar -->
-    <div class="d-flex overflow-auto pb-2 mb-3" style="white-space: nowrap;">
-        <a href="menu.php?meja=<?php echo $no_meja; ?>&kategori=all" class="btn btn-sm me-2 <?php echo $kat_id=='all'?'btn-dark':'btn-outline-dark'; ?>">Semua</a>
-        <?php foreach ($kategori as $k): ?>
-            <a href="menu.php?meja=<?php echo $no_meja; ?>&kategori=<?php echo $k['id']; ?>" 
-               class="btn btn-sm me-2 <?php echo $kat_id==$k['id']?'btn-dark':'btn-outline-dark'; ?>">
-               <?php echo htmlspecialchars($k['nama_kategori']); ?>
-            </a>
-        <?php endforeach; ?>
-    </div>
+    <section class="menu-listing" aria-labelledby="menu-listing-title">
+        <div class="menu-section-heading">
+            <div>
+                <span class="menu-section-kicker">Pilih sesuai seleramu</span>
+                <h2 id="menu-listing-title">Jelajahi Menu</h2>
+            </div>
+            <span class="menu-result-count"><?php echo count($menus); ?> pilihan</span>
+        </div>
+
+        <div class="menu-controls">
+            <nav class="menu-categories" aria-label="Filter kategori menu">
+                <a href="menu.php?meja=<?php echo urlencode($no_meja); ?>&kategori=all<?php echo $search !== '' ? '&search=' . urlencode($search) : ''; ?>" class="menu-category <?php echo $kat_id=='all'?'active':''; ?>">Semua</a>
+                <?php foreach ($kategori as $k): ?>
+                    <a href="menu.php?meja=<?php echo urlencode($no_meja); ?>&kategori=<?php echo urlencode($k['id']); ?><?php echo $search !== '' ? '&search=' . urlencode($search) : ''; ?>"
+                       class="menu-category <?php echo $kat_id==$k['id']?'active':''; ?>">
+                       <?php echo htmlspecialchars($k['nama_kategori']); ?>
+                    </a>
+                <?php endforeach; ?>
+            </nav>
+        </div>
+
+    <?php if (empty($menus)): ?>
+        <div class="menu-empty text-center py-5">
+            <i class="bi bi-search fs-2 text-warm-accent" aria-hidden="true"></i>
+            <p class="fw-semibold mt-2 mb-1">Menu tidak ditemukan</p>
+            <p class="text-muted small mb-0">Coba kata kunci atau kategori yang berbeda.</p>
+        </div>
+    <?php else: ?>
 
     <!-- Product Cards Grid -->
-    <div class="row g-3">
+    <div class="row g-2 g-md-3">
         <?php foreach ($menus as $m): ?>
-            <div class="col-6 col-md-4 col-lg-3">
+            <div class="col-6 col-sm-4 col-lg-3 col-xxl-2">
                 <div class="card card-menu h-100">
                     <?php
                     $foto = trim((string) ($m['foto'] ?? ''));
                     if ($m['nama_menu'] === 'Telur Ayam Kampung') {
                         $foto = 'telur.jpg';
                     }
-                    if ($foto !== ''):
+                    $foto = basename($foto);
+                    $menu_slug = trim(preg_replace('/[^a-z0-9]+/i', '_', (string) $m['nama_menu']), '_');
+                    $foto_candidates = [$foto];
+                    foreach (array_unique([$menu_slug, str_replace('_', '-', $menu_slug), str_replace('_', '', $menu_slug)]) as $slug) {
+                        foreach (['jpg', 'jpeg', 'png', 'webp'] as $extension) {
+                            $foto_candidates[] = $slug . '.' . $extension;
+                        }
+                    }
+                    $foto_terpilih = '';
+                    foreach ($foto_candidates as $candidate) {
+                        $candidate_key = strtolower(basename($candidate));
+                        if ($candidate_key !== '' && $candidate_key !== 'default.jpg' && isset($available_menu_images[$candidate_key])) {
+                            $foto_terpilih = $available_menu_images[$candidate_key];
+                            break;
+                        }
+                    }
+                    if ($foto_terpilih !== ''):
                     ?>
-                        <img src="../assets/img/<?php echo rawurlencode($foto); ?>"
+                        <img src="../assets/img/<?php echo rawurlencode($foto_terpilih); ?>"
                              class="card-img-top card-menu-image"
                              alt="<?php echo htmlspecialchars($m['nama_menu']); ?>"
                              loading="lazy">
+                    <?php else: ?>
+                        <div class="card-menu-image card-menu-image-placeholder" role="img" aria-label="Foto <?php echo htmlspecialchars($m['nama_menu']); ?> belum tersedia">
+                            <i class="bi bi-cup-hot" aria-hidden="true"></i>
+                        </div>
                     <?php endif; ?>
                     <div class="card-body d-flex flex-column justify-content-between p-2">
                         <div>
-                            <h6 class="card-title fw-bold mb-1"><?php echo htmlspecialchars($m['nama_menu']); ?></h6>
+                            <h2 class="card-title fw-bold mb-1"><?php echo htmlspecialchars($m['nama_menu']); ?></h2>
                             <p class="card-text text-muted small mb-2"><?php echo htmlspecialchars($m['deskripsi']); ?></p>
                         </div>
                         <div>
@@ -106,7 +167,9 @@ $menus = $stmt_menu->fetchAll();
             </div>
         <?php endforeach; ?>
     </div>
-</div>
+    <?php endif; ?>
+    </section>
+</main>
 
 <!-- Floating Cart Button -->
 <div class="sticky-cart">
