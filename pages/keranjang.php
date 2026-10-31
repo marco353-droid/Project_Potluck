@@ -41,8 +41,34 @@ $pesanan_buka = get_order_status($pdo) === 'buka';
     <button id="checkout-button" onclick="checkout()" class="btn btn-potluck w-100 py-2 fs-5" <?php echo $pesanan_buka ? '' : 'disabled'; ?>>Konfirmasi Pesanan</button>
 </div>
 
+<div id="empty-cart-dialog" class="cart-confirmation" role="alertdialog" aria-modal="true" aria-labelledby="empty-cart-title" aria-describedby="empty-cart-message" hidden>
+    <div class="cart-confirmation-card">
+        <div class="cart-confirmation-icon" aria-hidden="true">!</div>
+        <h2 id="empty-cart-title">Keranjang masih kosong</h2>
+        <p id="empty-cart-message">Tambahkan menu terlebih dahulu sebelum checkout.</p>
+        <button id="empty-cart-ok" type="button" class="btn btn-potluck">Oke</button>
+    </div>
+</div>
+
 <script>
 let orderingOpen = <?php echo json_encode($pesanan_buka); ?>;
+let checkoutButton = null;
+
+function showEmptyCartDialog() {
+    const dialog = document.getElementById('empty-cart-dialog');
+    checkoutButton = document.activeElement;
+    dialog.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('empty-cart-ok').focus();
+}
+
+function hideEmptyCartDialog() {
+    document.getElementById('empty-cart-dialog').hidden = true;
+    document.body.style.overflow = '';
+    if (checkoutButton instanceof HTMLElement) {
+        checkoutButton.focus();
+    }
+}
 
 function applyOrderingStatus(isOpen) {
     orderingOpen = isOpen;
@@ -119,7 +145,10 @@ function checkout() {
         return;
     }
     let cart = JSON.parse(localStorage.getItem('potluck_cart')) || [];
-    if (cart.length === 0) return alert('Keranjang kosong!');
+    if (cart.length === 0) {
+        showEmptyCartDialog();
+        return;
+    }
 
     let data = {
         meja: '<?php echo $no_meja; ?>',
@@ -144,6 +173,7 @@ function checkout() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('empty-cart-ok').addEventListener('click', hideEmptyCartDialog);
     renderCart();
     applyOrderingStatus(orderingOpen);
     refreshOrderingStatus();

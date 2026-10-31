@@ -37,26 +37,32 @@ $total_pendapatan = $pdo->query("SELECT SUM(total) FROM pesanan WHERE status = '
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Potluck86</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-<div class="d-flex">
-    <div class="bg-primary-brown text-white p-3 min-vh-100" style="width: 250px;">
+<div class="d-flex admin-dashboard-layout">
+    <aside class="bg-primary-brown text-white p-3 min-vh-100 admin-dashboard-sidebar">
         <h4>Potluck86</h4>
         <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
+        <ul class="nav nav-pills flex-column mb-auto admin-dashboard-nav">
             <li class="nav-item"><a href="dashboard.php" class="nav-link text-white active">Dashboard</a></li>
             <li><a href="pesanan.php" class="nav-link text-white">Pesanan</a></li>
             <li><a href="menu.php" class="nav-link text-white">Menu</a></li>
-            <li><a href="../pages/logout.php" class="nav-link text-danger mt-4">Logout</a></li>
         </ul>
-    </div>
+    </aside>
 
-    <div class="p-4 flex-grow-1">
-        <h2>Dashboard Admin</h2>
+    <main class="p-4 flex-grow-1 admin-dashboard-main">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+            <h2 class="mb-0">Dashboard Admin</h2>
+            <div class="d-flex flex-wrap align-items-center gap-3 admin-dashboard-account">
+                <span>Masuk sebagai <strong><?php echo htmlspecialchars($_SESSION['nama'] ?? 'Admin', ENT_QUOTES, 'UTF-8'); ?></strong></span>
+                <a href="../pages/logout.php" class="btn btn-outline-danger">Logout</a>
+            </div>
+        </div>
         <div class="card p-3 my-3 shadow-sm">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <div>
@@ -90,7 +96,7 @@ $total_pendapatan = $pdo->query("SELECT SUM(total) FROM pesanan WHERE status = '
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </div>
 
 </body>

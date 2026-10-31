@@ -15,7 +15,7 @@ $kategori = $stmt_kat->fetchAll();
 $kat_id = $_GET['kategori'] ?? 'all';
 $search = $_GET['search'] ?? '';
 
-$sql = "SELECT m.*, k.nama_kategori FROM menu m JOIN kategori k ON m.kategori_id = k.id WHERE m.status = 'tersedia'";
+$sql = "SELECT m.*, k.nama_kategori FROM menu m JOIN kategori k ON m.kategori_id = k.id";
 $params = [];
 
 if ($kat_id !== 'all') {
@@ -153,7 +153,11 @@ foreach (glob($menu_image_directory . '/*') ?: [] as $image_path) {
                         </div>
                         <div>
                             <div class="fw-bold text-warm-accent mb-2">Rp <?php echo number_format($m['harga'], 0, ',', '.'); ?></div>
-                            <button type="button" onclick="addToCart(<?php echo $m['id']; ?>, '<?php echo addslashes($m['nama_menu']); ?>', <?php echo $m['harga']; ?>)" class="btn btn-potluck btn-sm w-100 menu-add-button" <?php echo $pesanan_buka ? '' : 'disabled'; ?>>+ Tambah</button>
+                            <?php $menu_available = $m['status'] === 'tersedia' && (int) $m['stok'] > 0; ?>
+                            <?php if (!$menu_available): ?>
+                                <span class="badge bg-secondary mb-2">Stok habis</span>
+                            <?php endif; ?>
+                            <button type="button" data-menu-available="<?php echo $menu_available ? 'true' : 'false'; ?>" onclick="addToCart(<?php echo $m['id']; ?>, '<?php echo addslashes($m['nama_menu']); ?>', <?php echo $m['harga']; ?>)" class="btn btn-potluck btn-sm w-100 menu-add-button" <?php echo $pesanan_buka && $menu_available ? '' : 'disabled'; ?>><?php echo $menu_available ? '+ Tambah' : 'Stok habis'; ?></button>
                         </div>
                     </div>
                 </div>
@@ -171,14 +175,24 @@ foreach (glob($menu_image_directory . '/*') ?: [] as $image_path) {
     </a>
 </div>
 
+<div id="cart-confirmation" class="cart-confirmation" role="alertdialog" aria-modal="true" aria-labelledby="cart-confirmation-title" aria-describedby="cart-confirmation-message" hidden>
+    <div class="cart-confirmation-card">
+        <div class="cart-confirmation-icon" aria-hidden="true"><i class="bi bi-check-lg"></i></div>
+        <h2 id="cart-confirmation-title">Berhasil ditambahkan!</h2>
+        <p id="cart-confirmation-message">Pesanan sudah masuk ke keranjang.</p>
+        <button id="cart-confirmation-ok" type="button" class="btn btn-potluck">Oke</button>
+    </div>
+</div>
+
 <script>
 let orderingOpen = <?php echo json_encode($pesanan_buka); ?>;
+let lastAddButton = null;
 
 function applyOrderingStatus(isOpen) {
     orderingOpen = isOpen;
     document.getElementById('closed-notice').hidden = isOpen;
     document.querySelectorAll('.menu-add-button').forEach(button => {
-        button.disabled = !isOpen;
+        button.disabled = !isOpen || button.dataset.menuAvailable !== 'true';
     });
     const cartLink = document.getElementById('cart-link');
     cartLink.classList.toggle('disabled', !isOpen);
@@ -211,7 +225,23 @@ function addToCart(id, nama, harga) {
     }
     localStorage.setItem('potluck_cart', JSON.stringify(cart));
     updateCartBadge();
-    alert(nama + ' telah ditambahkan ke keranjang!');
+    showCartConfirmation();
+}
+
+function showCartConfirmation() {
+    const confirmation = document.getElementById('cart-confirmation');
+    lastAddButton = document.activeElement;
+    confirmation.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('cart-confirmation-ok').focus();
+}
+
+function hideCartConfirmation() {
+    document.getElementById('cart-confirmation').hidden = true;
+    document.body.style.overflow = '';
+    if (lastAddButton instanceof HTMLElement) {
+        lastAddButton.focus();
+    }
 }
 
 function updateCartBadge() {
@@ -221,6 +251,7 @@ function updateCartBadge() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('cart-confirmation-ok').addEventListener('click', hideCartConfirmation);
     updateCartBadge();
     refreshOrderingStatus();
     window.setInterval(refreshOrderingStatus, 5000);

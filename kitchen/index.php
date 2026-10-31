@@ -95,15 +95,18 @@ foreach ($rows as $row) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="bg-light">
+<body class="bg-light kitchen-dashboard">
 <header class="bg-primary-brown text-white py-3">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container d-flex justify-content-between align-items-center kitchen-dashboard-header">
         <h1 class="h4 mb-0">Pesanan Dapur</h1>
-        <a href="../pages/logout.php" class="btn btn-outline-light btn-sm">Keluar</a>
+        <div class="d-flex align-items-center gap-3 kitchen-dashboard-account">
+            <span>Masuk sebagai <strong><?php echo escape($_SESSION['nama'] ?? 'Dapur'); ?></strong></span>
+            <a href="../pages/logout.php" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
     </div>
 </header>
 
-<main class="container py-4" style="max-width: 900px;">
+<main class="container py-4 kitchen-dashboard-main" style="max-width: 900px;">
     <?php if (isset($_GET['updated'])): ?>
         <div class="alert alert-success" role="status">Status pesanan berhasil diperbarui.</div>
     <?php endif; ?>
