@@ -22,11 +22,6 @@ if ($kat_id !== 'all') {
     $sql .= " AND m.kategori_id = ?";
     $params[] = $kat_id;
 }
-if (!empty($search)) {
-    $sql .= " AND m.nama_menu LIKE ?";
-    $params[] = "%$search%";
-}
-
 $stmt_menu = $pdo->prepare($sql);
 $stmt_menu->execute($params);
 $menus = $stmt_menu->fetchAll();
@@ -93,7 +88,7 @@ foreach (glob($menu_image_directory . '/*') ?: [] as $image_path) {
                 <span class="menu-section-kicker">Pilih sesuai seleramu</span>
                 <h2 id="menu-listing-title">Jelajahi Menu</h2>
             </div>
-            <span class="menu-result-count"><?php echo count($menus); ?> pilihan</span>
+            <span class="menu-result-count" aria-live="polite"><?php echo count($menus); ?> pilihan</span>
         </div>
 
         <div class="menu-controls">
@@ -108,18 +103,16 @@ foreach (glob($menu_image_directory . '/*') ?: [] as $image_path) {
             </nav>
         </div>
 
-    <?php if (empty($menus)): ?>
-        <div class="menu-empty text-center py-5">
+        <div class="menu-empty text-center py-5" <?php echo empty($menus) ? '' : 'hidden'; ?>>
             <i class="bi bi-search fs-2 text-warm-accent" aria-hidden="true"></i>
             <p class="fw-semibold mt-2 mb-1">Menu tidak ditemukan</p>
             <p class="text-muted small mb-0">Coba kata kunci atau kategori yang berbeda.</p>
         </div>
-    <?php else: ?>
 
     <!-- Product Cards Grid -->
     <div class="row g-2 g-md-3">
         <?php foreach ($menus as $m): ?>
-            <div class="col-6 col-sm-4 col-lg-3 col-xxl-2">
+            <div class="col-6 col-sm-4 col-lg-3 col-xxl-2 menu-item">
                 <div class="card card-menu h-100">
                     <?php
                     $foto = trim((string) ($m['foto'] ?? ''));
@@ -167,7 +160,6 @@ foreach (glob($menu_image_directory . '/*') ?: [] as $image_path) {
             </div>
         <?php endforeach; ?>
     </div>
-    <?php endif; ?>
     </section>
 </main>
 
@@ -232,6 +224,35 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
     refreshOrderingStatus();
     window.setInterval(refreshOrderingStatus, 5000);
+
+    const searchInput = document.querySelector('.menu-search input[name="search"]');
+    const menuItems = Array.from(document.querySelectorAll('.menu-item'));
+    const resultCount = document.querySelector('.menu-result-count');
+    const emptyMessage = document.querySelector('.menu-empty');
+
+    function filterMenu() {
+        const query = searchInput.value.trim().toLocaleLowerCase('id');
+        let visibleCount = 0;
+
+        menuItems.forEach(item => {
+            const menuName = item.querySelector('.card-title').textContent.toLocaleLowerCase('id');
+            const isVisible = menuName.includes(query);
+            item.hidden = !isVisible;
+            if (isVisible) visibleCount += 1;
+        });
+
+        resultCount.textContent = visibleCount + ' pilihan';
+        emptyMessage.hidden = visibleCount !== 0;
+
+        if (query === '') {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('search');
+            window.history.replaceState(null, '', url);
+        }
+    }
+
+    searchInput.addEventListener('input', filterMenu);
+    filterMenu();
 });
 </script>
 </body>
