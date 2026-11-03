@@ -2,7 +2,7 @@
 session_start();
 require_once '../config/database.php';
 require_once '../config/order_status.php';
-
+// abcdefg hi jklmn
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header('Location: ../pages/login.php');
     exit;
