@@ -81,7 +81,7 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (15, 1, 'Butterscotch', 'Kopi khas potluck dengan rasa yang khas.', 25000.00, 'butterscotch.jpg', 150, 'tersedia'),
 
 -- Non Coffee
-(16, 2, 'Milo 86', 'Milo', 22000.00, 'milo.jpg', 150, 'tersedia'),
+(16, 2, 'Milo 86', 'Milo', 22000.00, 'milo_86.jpg', 150, 'tersedia'),
 (17, 2, 'Choco 86', 'Minuman Chocolate Khas potluck', 25000.00, 'choco.jpg', 150, 'tersedia'),
 (18, 2, 'Original ThaiTea', 'Tea khas potluck dengan rasa yang khas.', 22000.00, 'thaimassage.jpg', 150, 'tersedia'),
 (19, 2, 'Original ThaiGreenTea', 'Green Tea khas potluck dengan rasa yang khas.', 22000.00, 'thaimassage.jpg', 150, 'tersedia'),
@@ -116,7 +116,7 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (42, 2, 'Teh Tarik', 'Minuman teh tarik khas.', 20000.00, 'teh_tarik.jpg', 150, 'tersedia'),
 (43, 2, 'Ice Orange', 'Minuman es orange.', 20000.00, 'ice_orange.jpg', 150, 'tersedia'),
 (44, 2, 'Ice Lychee', 'Minuman es lychee.', 20000.00, 'ice_lychee.jpg', 150, 'tersedia'),
-(45, 2, 'Honey Lemon', 'Minuman honey   lemon segar.', 22000.00, 'Honey_Lemon.jpg', 150, 'tersedia'),
+(45, 2, 'Honey Lemon', 'Minuman honey lemon segar.', 22000.00, 'honey_lemon.jpg', 150, 'tersedia'),
 (46, 2, 'jeruk Peras', 'Minuman jeruk peras segar.', 22000.00, 'jeruk_peras.jpg', 150, 'tersedia'),
 
 -- Snacks
@@ -126,8 +126,8 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (50, 3, 'Toast Keju', 'Roti panggang dengan mentaga dan taburan keju, cocok untuk sarapan.', 18000.00, 'rotibakar.jpg', 150, 'tersedia'),
 (51, 3, 'Toast Jainudin', 'Roti panggang dengan mentaga dan taburan jainudin, cocok untuk sarapan.', 18000.00, 'rotibakar.jpg', 150, 'tersedia'),
 (52, 3, 'Smoked Chicken Sandwich', 'Sandwich dengan ayam asap, sayuran segar, dan saus spesial.', 25000.00, 'scs.jpg', 150, 'tersedia'),
-(53, 3, 'Pisang Goreng Srikaya', 'Pisang goreng renyah dengan taburan gula halus dan saus srikaya.', 18000.00, 'pisanggoreng.jpg', 150, 'tersedia'),
-(54, 3, 'Pisang Goreng Keju', 'Pisang goreng renyah dengan taburan keju parut dan susu.', 20000.00, 'pisanggoreng.jpg', 150, 'tersedia'),
+(53, 3, 'Pisang Goreng Srikaya', 'Pisang goreng renyah dengan taburan gula halus dan saus srikaya.', 18000.00, 'pisang_goreng_srikaya.jpg', 150, 'tersedia'),
+(54, 3, 'Pisang Goreng Keju', 'Pisang goreng renyah dengan taburan keju parut dan susu.', 20000.00, 'pisang_goreng_keju.jpg', 150, 'tersedia'),
 (55, 3, 'Singkong', 'Singkong renyah.', 20000.00, 'singkong.jpg', 150, 'tersedia'),
 (56, 3, 'French Fries', 'Kentang goreng renyah dengan saus.', 18000.00, 'ori.jpg', 150, 'tersedia'),
 (57, 3, 'Eggy Chicken Roll', 'Roti gulung dengan isian ayam, telur, dan sayuran segar.', 20000.00, 'egg_chicken_roll.jpg', 150, 'tersedia'),
@@ -160,7 +160,7 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (91, 7, 'Gringo BBQ', 'Nasi dengan ayam BBQ, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 150, 'tersedia'),
 (92, 7, 'Honey Oppa', 'Nasi dengan ayam honey, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 150, 'tersedia'),
 (93, 7, 'ChickenPop Geprek', 'Nasi dengan ayam BBQ, sayuran segar, dan saus spesial.', 26000.00, 'rice_bowl.jpg', 150, 'tersedia'),
-(94, 7, 'Fish Katsu', 'Nasi dengan ikan katsu, sayuran segar, dan saus spesial.', 32000.00, 'rice_bowl.jpg', 150, 'tersedia'),
+(94, 7, 'Fish Katsu', 'Nasi dengan ikan katsu, sayuran segar, dan saus spesial.', 32000.00, 'fish_sambal.jpg', 150, 'tersedia'),
 (95, 7, 'Beef Belly', 'Nasi dengan daging sapi, Black pepper , mushroom dan saus Spicy Butter.', 38000.00, 'mushroom_beef.jpg', 150, 'tersedia'),
 (96, 7, 'Wagyu Beef', 'Nasi dengan daging sapi Wagyu, Black pepper , mushroom dan saus Spicy Butter.', 45000.00, 'spicy_butter_wagyu.jpg', 150, 'tersedia'),
 (97, 7, 'Bulgogi Beef', 'Nasi dengan daging sapi Bulgogi.', 38000.00, 'rice_bowl.jpg', 150, 'tersedia'),
@@ -176,10 +176,6 @@ INSERT INTO `menu` (`id`, `kategori_id`, `nama_menu`, `deskripsi`, `harga`, `fot
 (104, 9, 'Telur Matamoe', 'Tambahan telur matamoe.', 5000.00, 'addons.jpg', 150, 'tersedia'),
 (105, 9, 'Mayo Original', 'Tambahan mayo original.', 4000.00, 'addons.jpg', 150, 'tersedia'),
 (106, 9, 'Sambal', 'Tambahan sambal Mata/Reggae/Rookie.', 4000.00, 'addons.jpg', 150, 'tersedia');
-
-
-
-
 
 
 -- 5. Tabel pesanan
@@ -207,14 +203,3 @@ CREATE TABLE `detail_pesanan` (
   FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan`(`id`) ON DELETE CASCADE,
   FOREIGN KEY (`menu_id`) REFERENCES `menu`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Dummy Pesanan untuk Dashboard
-INSERT INTO `pesanan` (`id`, `nomor_pesanan`, `meja_id`, `total`, `metode_pembayaran`, `status`, `waktu_pesanan`) VALUES
-(1, 'PLK08601', 8, 65000.00, 'Bayar di Kasir', 'Diproses', NOW());
-
-INSERT INTO `detail_pesanan` (`pesanan_id`, `menu_id`, `jumlah`, `harga`, `catatan`, `subtotal`) VALUES
-(1, 1, 1, 25000.00, 'Jangan terlalu pedas', 25000.00),
-
-
-
-(1, 6, 2, 20000.00, 'Sedikit es', 40000.00);
