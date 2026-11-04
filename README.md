@@ -1,0 +1,39 @@
+Cara Run Website
+
+1. Install Laragon sebagai localhost ( XAMPP banyak masalah )
+https://laragon.org/
+
+2. Setelah install Laragon , buka Laragon , Start all
+
+3. Pastikan sudah clone semua files dari repository GitHub ke dalam vscode (biru) dengan
+git clone (link repo) dan simpan folder Project secara local di laptop/pc
+
+4. Click Databases pada Laragon
+
+5. Sambungkan database Potluck 	dalam folder database ke Laragon
+
+
+6. masuk ke salah satu session dengan cara di double click
+7. Click File -> load sql file -> lalu masuk ke folder database click file database potluck
+
+8. Jika sudah , masuk ke Terminal Laragon dan input command dibawah untuk memasuki directory project
+
+ cd /d "D:\Code\Dart\project A"
+
+sesuaikan dengan dimana anda menyimpan folder project dan namanya
+
+setelah itu run command dibawah ini pada terminal
+
+php -S 0.0.0.0:8000 -t .
+
+
+
+9. buka cmd lalu ketik ipconfig dan copy ipv4 laptop
+
+perangkat hp dan laptop wajib menggunakan wifi / koneksi yang sama agar website dapat diakses
+
+10. buka browser hp lalu masukin link seperti berikut
+http://(ipv4 laptop):8000/
+
+
+untuk mematikan server Kembali ke terminal lalu click ctrl + c
